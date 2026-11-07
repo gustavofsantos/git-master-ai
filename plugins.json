@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "claude-code": {
+      "harness": "Claude Code",
+      "manifest": "plugins/claude-code/.claude-plugin/plugin.json",
+      "min_gitmaster": "0.0.0"
+    }
+  }
+}
