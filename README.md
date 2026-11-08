@@ -6,7 +6,7 @@ Plugins that connect AI coding agents to [GitMaster](https://github.com/gustavof
 |---|---|---|
 | `claude-code` | Claude Code | `plugins/claude-code/` |
 
-The Claude Code plugin ships the skills `propose-memories`, `prepare` and `inbox`, which use GitMaster memories and review comments.
+The Claude Code plugin ships the skills `propose-memories`, `consolidate`, `prepare` and `inbox`, which use GitMaster memories and review comments. The sub-agents `memory-proposer` and `memory-consolidator` run only when a skill starts them, and only propose.
 
 Codex, Cursor and Antigravity plugins are added here as their formats are verified.
 
@@ -26,7 +26,7 @@ Each plugin has its own semantic version, independent of the GitMaster app. The 
 ```sh
 scripts/plugin-version.sh claude-code show
 scripts/plugin-version.sh claude-code minor --min-gitmaster 0.3.0
-git push origin main claude-code-v0.2.0
+git push origin main claude-code-v0.3.0
 ```
 
 The script bumps the manifest, runs `scripts/check.sh`, commits and tags `<plugin>-vX.Y.Z`. It never pushes. Raise `min_gitmaster` when a plugin starts to rely on a hook or MCP tool that only newer GitMaster versions have.
