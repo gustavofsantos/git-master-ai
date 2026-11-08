@@ -9,6 +9,9 @@ GitMaster tools (MCP server `gitmaster`) cover what your own tools cannot see.
   After you change the code for a comment, call `review_comment_resolve` with its `id` and a short
   `summary`. That marks it handled; only the user resolves it. An `outdated` comment has no lines:
   ask the user or search the file for its `anchor_text`.
+  A comment is a thread: it lists its `replies`, oldest first. To ask a question or answer without
+  handling the comment, call `review_comment_reply` with the comment `id` and a `body`; the user's
+  reply on a handled comment reopens it, so read the replies before you act again.
 - Earlier decisions: call `threads_search` with plain words, then `thread_read` with `around` set to
   the hit's `seq` (widen with `before` and `after`, or page with `from`). `thread_get` is optional and
   only for an overview. Never read a long thread from the start to find a hit.
