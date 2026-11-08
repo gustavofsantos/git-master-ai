@@ -6,6 +6,8 @@ Plugins that connect AI coding agents to [GitMaster](https://github.com/gustavof
 |---|---|---|
 | `claude-code` | Claude Code | `plugins/claude-code/` |
 
+The Claude Code plugin ships the skills `propose-memories` and `prepare`, which use GitMaster memories.
+
 Codex, Cursor and Antigravity plugins are added here as their formats are verified.
 
 ## Install (Claude Code)
