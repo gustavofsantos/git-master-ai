@@ -25,11 +25,16 @@ Each plugin has its own semantic version, independent of the GitMaster app. The 
 
 ```sh
 scripts/plugin-version.sh claude-code show
-scripts/plugin-version.sh claude-code minor --min-gitmaster 0.3.0
-git push origin main claude-code-v0.3.0
+scripts/plugin-version.sh claude-code minor
+git push origin main claude-code-v0.4.0
 ```
 
-The script bumps the manifest, runs `scripts/check.sh`, commits and tags `<plugin>-vX.Y.Z`. It never pushes. Raise `min_gitmaster` when a plugin starts to rely on a hook or MCP tool that only newer GitMaster versions have.
+The script bumps the manifest, runs `scripts/check.sh`, commits and tags `<plugin>-vX.Y.Z`. It never pushes. Raise `min_gitmaster` (add `--min-gitmaster X.Y.Z`) when a plugin starts to rely on a hook or MCP tool that only newer GitMaster versions have.
+
+### Changes
+
+- **0.4.0**: the `prepare` skill marks the memories it used at the end of the work (`memory_mark`, `useful` or `wrong` with a reason) and shows a memory with a `wrong` mark as unverified. The `gitmaster` skill explains how to mark honestly and that a mark can be revised. The `memory-consolidator` agent and the `consolidate` skill check memories with a `wrong` mark first, and a disagreement between marks is a reason to check. The consolidator does not mark memories.
+- **0.3.0**: the `memory-consolidator` agent and the `consolidate` skill (`/gitmaster:consolidate`); `prepare` caps its brief at 10 memories and about 2,000 characters.
 
 ## Use in the GitMaster repository
 

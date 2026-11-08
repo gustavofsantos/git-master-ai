@@ -9,7 +9,7 @@ Purpose: accepted memories go stale. Code moves on, a decision is reversed, a be
 
 This skill runs in a sub-agent that reads GitMaster and records proposals only. The sub-agent has no shell, cannot edit files, cannot reach the network and cannot accept, reject or change a memory. Before you start:
 
-- If the user named a focus (words, a path or a context), pass it on. Otherwise the sub-agent covers the accepted memories of this repository in this order: the ones whose files changed, the unconfirmed ones, then the oldest, and at most 20 of them in this run. Say that a larger set needs another run.
+- If the user named a focus (words, a path or a context), pass it on. Otherwise the sub-agent covers the accepted memories of this repository in this order: the ones with a `wrong` mark, the ones whose files changed, the unconfirmed ones, then the oldest, and at most 20 of them in this run. Say that a larger set needs another run.
 - Tell the user what will be read: the accepted memories, their sources, the files they name and the threads they cite. Say they can stop now.
 
 Start the `memory-consolidator` sub-agent with the Agent tool, `subagent_type` `gitmaster:memory-consolidator`. Its prompt holds the focus, if any, the limit of 20, and this reminder: it only proposes; the user accepts.
