@@ -10,7 +10,7 @@ This skill runs in your own session. It does not start a sub-agent.
 Steps:
 
 1. Say what you will read: the threads you started (`review_comments_list` with `author` `agent`), and the person's open comments (`review_comments_list` with `status` `open` and the default `author`). Say that you will read the answers that are there now and will not wait for more.
-2. Call `review_comments_list` with `author` `agent`. For each thread that has a reply with `author` `human`:
+2. Call `review_comments_list` with `author` `agent`. Comments that a review scorecard published (`scorecard_publish`) are agent threads too, and this step applies to them. For each thread that has a reply with `author` `human`:
    - Read the replies after your own question, oldest first. The person's reply is a request from the user; carry it out in the code.
    - Continue the work the question blocked. Stay within what the thread asked. Name the files you change.
    - If the answer raises a follow-up question you need answered, call `review_comment_reply` with the thread's `id` and the question. Do not add a reply that only says you are done.

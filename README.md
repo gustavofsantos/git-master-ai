@@ -6,7 +6,7 @@ Plugins that connect AI coding agents to [GitMaster](https://github.com/gustavof
 |---|---|---|
 | `claude-code` | Claude Code | `plugins/claude-code/` |
 
-The Claude Code plugin ships the skills `propose-memories`, `consolidate`, `prepare` and `inbox`, which use GitMaster memories and review comments. The sub-agents `memory-proposer` and `memory-consolidator` run only when a skill starts them, and only propose.
+The Claude Code plugin ships the skills `propose-memories`, `consolidate`, `prepare`, `inbox` and `write-reviewer`, which use GitMaster memories, review comments and review workflows. The sub-agents `memory-proposer` and `memory-consolidator` run only when a skill starts them, and only propose.
 
 Codex, Cursor and Antigravity plugins are added here as their formats are verified.
 
@@ -26,13 +26,14 @@ Each plugin has its own semantic version, independent of the GitMaster app. The 
 ```sh
 scripts/plugin-version.sh claude-code show
 scripts/plugin-version.sh claude-code minor
-git push origin main claude-code-v0.4.0
+git push origin main claude-code-v0.5.0
 ```
 
 The script bumps the manifest, runs `scripts/check.sh`, commits and tags `<plugin>-vX.Y.Z`. It never pushes. Raise `min_gitmaster` (add `--min-gitmaster X.Y.Z`) when a plugin starts to rely on a hook or MCP tool that only newer GitMaster versions have.
 
 ### Changes
 
+- **0.5.0**: review workflows replace reviewer sub-agent files. The `write-reviewer` skill (`/gitmaster:write-reviewer`) writes one Lua workflow for a review of every change or of one task; the `create-reviewer` skill, which wrote a sub-agent file, is removed. The `gitmaster` and `inbox` skills say that a comment can carry a label and decorations, and that a scorecard's comments come from `scorecard_publish`.
 - **0.4.0**: the `prepare` skill marks the memories it used at the end of the work (`memory_mark`, `useful` or `wrong` with a reason) and shows a memory with a `wrong` mark as unverified. The `gitmaster` skill explains how to mark honestly and that a mark can be revised. The `memory-consolidator` agent and the `consolidate` skill check memories with a `wrong` mark first, and a disagreement between marks is a reason to check. The consolidator does not mark memories.
 - **0.3.0**: the `memory-consolidator` agent and the `consolidate` skill (`/gitmaster:consolidate`); `prepare` caps its brief at 10 memories and about 2,000 characters.
 
