@@ -10,11 +10,11 @@ This skill runs in your own session. It does not start a sub-agent. Building the
 Steps:
 
 1. Say what you will read: the accepted memories that match the task, the threads that match it, and the history of the files the task likely touches.
-2. Call `memories_search` with the task in plain words, `status` `accepted`, `scope` `all` and `limit` `10`. Check `files_changed_since` on each memory. If it is not empty, say the memory may be stale and name the changed or missing files. Check each memory's `marks` too.
+2. Call `contexts_list` with `all` `true`. A context with `bound` `false` is an area of knowledge this repository does not work in. If the task names one, call `memories_search` for it with `scope` set to its path, `status` `accepted` and `limit` `10`, and keep its memories with the rest. Then call `memories_search` with the task in plain words, `status` `accepted`, `scope` `bound` and `limit` `10`: the contexts this repository is bound to and the contexts above them. Check `files_changed_since` on each memory. If it is not empty, say the memory may be stale and name the changed or missing files. Check each memory's `marks` too.
 3. Call `threads_search` with the task in plain words, and read the most relevant hits with `thread_read` using `around` set to the hit's `seq`. Do not read a whole long thread from the start.
 4. Name the files the task likely touches. For each, call `provenance` with its path and the lines that matter, if you know them. Note the commits and threads that touched them.
 5. Return a brief with these sections, in this order, and nothing else:
-   - **Relevant memories**: each with its `kind`, `basis` and `id`, the stale warning if any, and the unverified warning for a memory with a `wrong` mark (see the rules). At most 10 memories and about 2,000 characters of memory text in all. Count as you go: when more match, keep the most relevant and say how many you left out.
+   - **Relevant memories**: each with its `kind`, `basis`, its context (the `scope` path) and `id`, the stale warning if any, and the unverified warning for a memory with a `wrong` mark (see the rules). At most 10 memories and about 2,000 characters of memory text in all. Count as you go: when more match, keep the most relevant and say how many you left out.
    - **Related threads**: each with its `uid` and one line on why it matters.
    - **File history**: one line per file with the notable commits or threads.
    - **Open questions**: what the memories and threads do not settle.
