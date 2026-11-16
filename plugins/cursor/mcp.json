@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "gitmaster": {
+      "command": "gitmaster",
+      "args": [
+        "mcp"
+      ],
+      "env": {
+        "GITMASTER_PROJECT_DIR": "${workspaceFolder}"
+      }
+    }
+  }
+}

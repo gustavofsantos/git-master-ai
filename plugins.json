@@ -4,6 +4,11 @@
       "harness": "Claude Code",
       "manifest": "plugins/claude-code/.claude-plugin/plugin.json",
       "min_gitmaster": "0.0.0"
+    },
+    "cursor": {
+      "harness": "Cursor",
+      "manifest": "plugins/cursor/.cursor-plugin/plugin.json",
+      "min_gitmaster": "0.0.0"
     }
   }
 }

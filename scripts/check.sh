@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Consistency check for the repository: every JSON file parses, every plugin in plugins.json has
 # a manifest with a semver version and a minimum GitMaster version, and the Claude Code
-# marketplace points at plugin directories that exist. Run by CI and before a release.
+# and Cursor marketplaces point at plugin directories that exist, and the Cursor skills and agents
+# are named after their files. Run by CI and before a release.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -23,8 +24,19 @@ for id in $(jq -r '.plugins | keys[]' plugins.json); do
   [ -d "plugins/$id" ] || err "$id: plugins/$id is missing"
 done
 
-for source in $(jq -r '.plugins[].source' .claude-plugin/marketplace.json); do
-  [ -d "$source" ] || err "marketplace source $source is missing"
+for marketplace in .claude-plugin/marketplace.json .cursor-plugin/marketplace.json; do
+  for source in $(jq -r '.plugins[].source' "$marketplace"); do
+    [ -d "$source" ] || err "$marketplace: source $source is missing"
+  done
+done
+
+# Cursor loads a skill only when its name matches its folder, and an agent by its name.
+for skill in plugins/cursor/skills/*/SKILL.md; do
+  folder=$(basename "$(dirname "$skill")")
+  grep -qx "name: $folder" "$skill" || err "$skill: name is not $folder"
+done
+for agent in plugins/cursor/agents/*.md; do
+  grep -qx "name: $(basename "$agent" .md)" "$agent" || err "$agent: name is not its file name"
 done
 
 exit $fail

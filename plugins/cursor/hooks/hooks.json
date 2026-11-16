@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5,
+        "matcher": "Write|Delete"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5,
+        "matcher": "*"
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5,
+        "matcher": "*"
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ],
+    "stop": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "gitmaster thread hook --harness cursor",
+        "timeout": 5
+      }
+    ]
+  }
+}
